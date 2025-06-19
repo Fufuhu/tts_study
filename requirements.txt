@@ -1,5 +1,6 @@
 annotated-types==0.7.0
 certifi==2025.6.15
+cffi==1.17.1
 charset-normalizer==3.4.2
 click==8.2.1
 cmudict==1.0.32
@@ -42,6 +43,7 @@ nvidia-nvtx-cu11==11.8.86
 packaging==25.0
 pillow==11.0.0
 proces==0.1.7
+pycparser==2.22
 pydantic==2.11.7
 pydantic_core==2.33.2
 pyopenjtalk_dict==0.3.4.dev2
@@ -53,6 +55,8 @@ requests==2.32.4
 safetensors==0.5.3
 setuptools==70.2.0
 six==1.17.0
+sounddevice==0.5.2
+soundfile==0.13.1
 style-bert-vits2==2.5.0
 sympy==1.13.3
 tokenizers==0.21.1
