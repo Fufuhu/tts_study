@@ -6,6 +6,7 @@ from style_bert_vits2.tts_model import TTSModel
 from huggingface_hub import hf_hub_download
 import sounddevice as sd
 import soundfile as sf
+import os
 
 
 def main():
@@ -49,6 +50,7 @@ def main():
 
     sound = AudioSegment.from_wav("temp.wav")
     sound.export("output.mp3", format="mp3")
+    os.remove("temp.wav")
 
 if __name__ == "__main__":
     main()
