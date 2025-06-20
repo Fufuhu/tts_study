@@ -47,10 +47,14 @@ def main():
     # sd.play(audio, sr)
     # sd.wait()
     sf.write("temp.wav", audio, sr)
-
-    sound = AudioSegment.from_wav("temp.wav")
-    sound.export("output.mp3", format="mp3")
-    os.remove("temp.wav")
+    try:
+        sound = AudioSegment.from_wav("temp.wav")
+        sound.export("output.mp3", format="mp3")
+    except Exception as e:
+        print(f"mp3作成時にエラーが発生しました: {e}")
+    finally:
+        if os.path.exists("temp.wav"):
+            os.remove("temp.wav")
 
 if __name__ == "__main__":
     main()
