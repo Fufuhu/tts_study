@@ -1,9 +1,11 @@
+from pydub import AudioSegment
 from style_bert_vits2.nlp import bert_models
 from style_bert_vits2.constants import Languages
 from pathlib import Path
 from style_bert_vits2.tts_model import TTSModel
 from huggingface_hub import hf_hub_download
 import sounddevice as sd
+import soundfile as sf
 
 
 def main():
@@ -41,8 +43,12 @@ def main():
     """
     sr, audio = model.infer(text=text)
     #再生
-    sd.play(audio, sr)
-    sd.wait()
+    # sd.play(audio, sr)
+    # sd.wait()
+    sf.write("temp.wav", audio, sr)
+
+    sound = AudioSegment.from_wav("temp.wav")
+    sound.export("output.mp3", format="mp3")
 
 if __name__ == "__main__":
     main()
