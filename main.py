@@ -7,6 +7,7 @@ from huggingface_hub import hf_hub_download
 import sounddevice as sd
 import soundfile as sf
 import os
+import tempfile
 
 
 def main():
@@ -46,15 +47,17 @@ def main():
     #再生
     # sd.play(audio, sr)
     # sd.wait()
-    sf.write("temp.wav", audio, sr)
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_wav:
+        temp_wav_path = tmp_wav.name
+        sf.write(temp_wav_path, audio, sr)
     try:
-        sound = AudioSegment.from_wav("temp.wav")
+        sound = AudioSegment.from_wav(temp_wav_path)
         sound.export("output.mp3", format="mp3")
     except Exception as e:
         print(f"mp3作成時にエラーが発生しました: {e}")
     finally:
-        if os.path.exists("temp.wav"):
-            os.remove("temp.wav")
+        if os.path.exists(temp_wav_path):
+            os.remove(temp_wav_path)
 
 if __name__ == "__main__":
     main()
