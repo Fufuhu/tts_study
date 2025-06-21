@@ -18,6 +18,11 @@ class ModelManager:
         self.style_vec_path = None
 
     def download_model_files(self) -> Tuple[Path, Path, Path]:
+        """
+        モデルの重みファイル、設定ファイル、スタイルベクトルファイルをHugging Face Hubからダウンロードし、
+        それぞれのローカルパスを返します。
+        戻り値: (model_path, config_path, style_vec_path)
+        """
         file_descriptions = [
             (self.model_file, "モデル重みファイル"),
             (self.config_file, "設定ファイル"),
@@ -32,6 +37,11 @@ class ModelManager:
         return self.model_path, self.config_path, self.style_vec_path
 
     def create_tts_model(self, device: str = "cpu") -> TTSModel:
+        """
+        ダウンロード済みのモデルファイル、設定ファイル、スタイルベクトルファイルを使って
+        TTSModelインスタンスを作成し返します。
+        deviceで使用するデバイス（例: 'cpu', 'cuda'）を指定できます。
+        """
         if not all([self.model_path, self.config_path, self.style_vec_path]):
             raise RuntimeError("モデルファイルがダウンロードされていません。先にdownload_model_files()を呼んでください。")
         return TTSModel(
@@ -40,4 +50,3 @@ class ModelManager:
             style_vec_path=self.style_vec_path,
             device=device,
         )
-
