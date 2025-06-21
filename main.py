@@ -8,6 +8,7 @@ import sounddevice as sd
 import soundfile as sf
 import os
 import tempfile
+import logging
 
 
 def main():
@@ -26,7 +27,7 @@ def main():
     assets_root = Path("model_assets")
 
     for file in [model_file, config_file, style_file]:
-        print(file)
+        logging.info(file)
         # hf_hub_download("litagin/style_bert_vits2_jvnv", file, local_dir="model_assets")
         hf_hub_download("litagin/sbv2_amitaro", file, local_dir="model_assets")
 
